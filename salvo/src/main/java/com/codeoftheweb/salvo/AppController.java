@@ -1,6 +1,8 @@
 package com.codeoftheweb.salvo;
+//package Game.java;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +24,6 @@ public class AppController {
         List<Game> games = gameRepository.findAll();
         List<Map> gamesList = new ArrayList<>();
 
-
         games.forEach(game -> {
             System.out.println(game.getPlayers());
             Map<String, Object> gameMap = new LinkedHashMap<>();
@@ -32,6 +33,43 @@ public class AppController {
         gamesList.add(gameMap);
         });
         return gamesList;
-    }
-}
+    };
 
+    @RequestMapping("/gamePlayers")
+    public List<Map> getGamePlayerId(){
+        //System.out.println(id);
+        List<GamePlayer> gamePlayers = gamePlayerRepository.findAll();
+        List<Map> gamesList = new ArrayList<>();
+
+
+        for (GamePlayer gamePlayer: gamePlayers) {
+            //System.out.println(game.getPlayers());
+            Map<String, Object> gameMap = new LinkedHashMap<>();
+            gameMap.put("id_gamePlayer", gamePlayer.getId());;
+            gameMap.put("created", gamePlayer.getGame().getDate());
+            gameMap.put("players", gamePlayer.getPlayer());
+           // gameMap.put("ships", gamePlayer.getShips());
+            gamesList.add(gameMap);
+        };
+        return gamesList;
+    }
+
+    @RequestMapping("/gamePlayers/{id}")
+    public List<Map> getGamePlayerId(@PathVariable long id){
+        //System.out.println(id);
+        List<GamePlayer> gamePlayers = gamePlayerRepository.findAllById(Collections.singleton(id));
+        List<Map> gamesList = new ArrayList<>();
+
+
+        for (GamePlayer gamePlayer: gamePlayers) {
+            //System.out.println(game.getPlayers());
+            Map<String, Object> gameMap = new LinkedHashMap<>();
+            gameMap.put("id_gamePlayer", gamePlayer.getId());;
+            gameMap.put("created", gamePlayer.getGame().getDate());
+            gameMap.put("players", gamePlayer.getPlayer());
+            gamesList.add(gameMap);
+        };
+        return gamesList;
+    }
+
+}

@@ -23,6 +23,7 @@ public class GamePlayer {
 
     @OneToMany(mappedBy="gamePlayer", fetch=FetchType.EAGER)
     Set<Ship> ships;
+    //private GamePlayer gamePlayer;
 
     public GamePlayer() {
     }
@@ -31,26 +32,21 @@ public class GamePlayer {
         this.game = game;
         this.player = player;
     }
-    
-    public void setPlayer(Player player){
-        this.player = player;
-    }
-    public void setGame(Game game){
-        this.game = game;
-    }
-    public Player getPlayer(){
+
+    public Player getPlayer() {
         return player;
     }
-    public Game getGame(){
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Game getGame() {
         return game;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public Set<Ship> getShips() {
@@ -59,5 +55,9 @@ public class GamePlayer {
 
     public void setShips(Set<Ship> ships) {
         this.ships = ships;
+    }
+
+    public long getId() {
+        return id;
     }
 }
