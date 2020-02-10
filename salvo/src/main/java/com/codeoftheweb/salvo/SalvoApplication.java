@@ -70,6 +70,7 @@ public class SalvoApplication {
 				shipRepository.save(cruiser);
 				shipRepository.save(destroyer);
 				shipRepository.save(battleship);
+				shipRepository.save(cruiser2);
 			};
 		}
 	}
