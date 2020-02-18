@@ -1,5 +1,7 @@
 let  lists = [];
-const url = "http://localhost:8080/api/games";
+
+const url = "http://localhost:8080/api/games/";
+console.log(url)
 fetch(url, {
   headers: {
     "Content-Type": "application/json",

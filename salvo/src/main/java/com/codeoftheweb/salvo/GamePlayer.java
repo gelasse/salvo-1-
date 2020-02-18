@@ -3,6 +3,7 @@ package com.codeoftheweb.salvo;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,7 +24,10 @@ public class GamePlayer {
 
     @OneToMany(mappedBy="gamePlayer", fetch=FetchType.EAGER)
     Set<Ship> ships;
+
     //private GamePlayer gamePlayer;
+    @OneToMany(mappedBy="gamePlayer", fetch=FetchType.EAGER)
+    Set<Salvo> salvos = new HashSet<>();
 
     public GamePlayer() {
     }
@@ -51,6 +55,9 @@ public class GamePlayer {
 
     public Set<Ship> getShips() {
         return ships;
+    }
+    public Set<Salvo> getSalvos() {
+        return salvos;
     }
 
     public void setShips(Set<Ship> ships) {

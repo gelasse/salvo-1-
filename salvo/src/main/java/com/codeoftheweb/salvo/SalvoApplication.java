@@ -17,7 +17,7 @@ public class SalvoApplication {
 
 		@Bean
 		public CommandLineRunner initData (PlayerRepository repository, GameRepository
-		gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository){
+		gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository ,SalvoRepository salvoRepository){
 			return (args) -> {
 				// save a couple of customers
 				Player player_1 = new Player("Jake", "Brauer", "jacke_brauer@gmail.com");
@@ -35,8 +35,7 @@ public class SalvoApplication {
 				Game game_3 = new Game(newDate_1_2);
 
 				GamePlayer gamePlayer_1 = new GamePlayer(game_1, player_1);
-				GamePlayer gamePlayer_2 = new GamePlayer(game_2, player_2);
-				GamePlayer gamePlayer_3 = new GamePlayer(game_3, player_3);
+				GamePlayer gamePlayer_2 = new GamePlayer(game_2, player_2);	//gamePlayer_1.addShip(cruiser);
 
 				List<String> location1 = new ArrayList<>();
 				location1.add("A1");
@@ -53,11 +52,32 @@ public class SalvoApplication {
 				location3.add("C1");
 				location3.add("C2");
 				location3.add("C3");
-				Ship cruiser = new Ship("cruiser", location1, gamePlayer_1);
-				//gamePlayer_1.addShip(cruiser);
 				Ship destroyer = new Ship("destroyer", location2, gamePlayer_1);
 				Ship battleship = new Ship("battleship", location3, gamePlayer_1);
 				Ship cruiser2 = new Ship("cruiser", location1, gamePlayer_2);
+
+				GamePlayer gamePlayer_3 = new GamePlayer(game_3, player_3);
+
+				Ship cruiser = new Ship("cruiser", location1, gamePlayer_1);
+				List<String> salvoLocation1 = new ArrayList<>();
+				salvoLocation1.add("C1");
+				salvoLocation1.add("C2");
+				salvoLocation1.add("C3");
+				List<String> salvoLocation2 = new ArrayList<>();
+				salvoLocation1.add("B1");
+				salvoLocation1.add("B2");
+				salvoLocation1.add("B3");
+				List<String> salvoLocation3 = new ArrayList<>();
+				salvoLocation1.add("A1");
+				salvoLocation1.add("A2");
+				salvoLocation1.add("A3");
+				salvoLocation1.add("A4");
+				salvoLocation1.add("A5");
+				Salvo salvo1_1 = new Salvo(gamePlayer_1, 1, salvoLocation1);
+				Salvo salvo1_2 = new Salvo(gamePlayer_1, 2, salvoLocation2);
+				Salvo salvo2_1 = new Salvo(gamePlayer_1, 1, salvoLocation1);
+				Salvo salvo2_2 = new Salvo(gamePlayer_2, 2, salvoLocation3);
+				Salvo salvo3 = new Salvo(gamePlayer_3, 3, salvoLocation3);
 				repository.save(player_1);
 				repository.save(player_2);
 				repository.save(player_3);
@@ -71,7 +91,11 @@ public class SalvoApplication {
 				shipRepository.save(destroyer);
 				shipRepository.save(battleship);
 				shipRepository.save(cruiser2);
+				salvoRepository.save(salvo1_1);
+				salvoRepository.save(salvo1_2);
+				salvoRepository.save(salvo2_2);
+				salvoRepository.save(salvo2_1);
+				salvoRepository.save(salvo3);
 			};
 		}
 	}
-

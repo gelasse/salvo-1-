@@ -20,6 +20,7 @@ public class AppController {
     private ShipRepository shipRepository;
     @Autowired
     private GamePlayerRepository gamePlayerRepository;
+    @Autowired SalvoRepository salvoRepository;
 
     @RequestMapping("/games")
     public List<Map> getAll() {
@@ -67,6 +68,7 @@ public class AppController {
             gameMap.put("created", gamePlayer.getGame().getDate());
             gameMap.put("players", gamePlayer.getPlayer());
             gameMap.put("ships", gamePlayer.getShips());
+            gameMap.put("salvos", gamePlayer.getSalvos());
             gamesList.add(gameMap);
         };
         return gamesList;
@@ -85,6 +87,7 @@ public class AppController {
             gameMap.put("created", gamePlayer.getGame().getDate());
             gameMap.put("players", gamePlayer.getPlayer());
             gameMap.put("ships", gamePlayer.getShips());
+            gameMap.put("salvos", gamePlayer.getSalvos());
             gamesList.add(gameMap);
         };
         return gamesList;

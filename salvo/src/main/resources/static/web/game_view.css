@@ -1,0 +1,18 @@
+body
+{
+color: green;}
+table{
+border-collapse: collapse;
+width: 1000px;}
+td{
+border: black 1px solid;
+}
+
+#1
+{
+color: black;
+}
+#output
+{
+color: black;
+}
