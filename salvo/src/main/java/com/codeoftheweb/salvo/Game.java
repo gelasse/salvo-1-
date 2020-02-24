@@ -21,7 +21,8 @@ public class Game {
 
     @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
-
+    @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
+    Set<Score> scores;
 
     public Game() { }
 
@@ -35,6 +36,14 @@ public class Game {
 
     public List<Player> getPlayers() {
         return (List<Player>) gamePlayers.stream().map(sub -> sub.getPlayer()).collect(toList());
+    }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
 
     public void setDate(Date date) {

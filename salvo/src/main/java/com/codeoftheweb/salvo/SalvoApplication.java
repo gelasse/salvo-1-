@@ -17,7 +17,7 @@ public class SalvoApplication {
 
 		@Bean
 		public CommandLineRunner initData (PlayerRepository repository, GameRepository
-		gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository ,SalvoRepository salvoRepository){
+		gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository ,SalvoRepository salvoRepository, ScoreRepository scoreRepository){
 			return (args) -> {
 				// save a couple of customers
 				Player player_1 = new Player("Jake", "Brauer", "jacke_brauer@gmail.com");
@@ -35,13 +35,13 @@ public class SalvoApplication {
 				Game game_3 = new Game(newDate_1_2);
 
 				GamePlayer gamePlayer_1 = new GamePlayer(game_1, player_1);
-				GamePlayer gamePlayer_2 = new GamePlayer(game_2, player_2);	//gamePlayer_1.addShip(cruiser);
+				GamePlayer gamePlayer_2 = new GamePlayer(game_2, player_2);    //gamePlayer_1.addShip(cruiser);
 
 				List<String> location1 = new ArrayList<>();
 				location1.add("A1");
 				location1.add("A2");
 				location1.add("A3");
-				location1.add("A4");
+				location1.add("J4");
 				location1.add("A5");
 				List<String> location2 = new ArrayList<>();
 				location2.add("B1");
@@ -78,6 +78,9 @@ public class SalvoApplication {
 				Salvo salvo2_1 = new Salvo(gamePlayer_1, 1, salvoLocation1);
 				Salvo salvo2_2 = new Salvo(gamePlayer_2, 2, salvoLocation3);
 				Salvo salvo3 = new Salvo(gamePlayer_3, 3, salvoLocation3);
+				Score score_1 = new Score(game_1, player_1, 0);
+				Score score_2 = new Score(game_2, player_1, 0.5);
+				Score score_3 = new Score(game_3, player_2, 1);
 				repository.save(player_1);
 				repository.save(player_2);
 				repository.save(player_3);
@@ -96,6 +99,9 @@ public class SalvoApplication {
 				salvoRepository.save(salvo2_2);
 				salvoRepository.save(salvo2_1);
 				salvoRepository.save(salvo3);
+				scoreRepository.save(score_1);
+				scoreRepository.save(score_2);
+				scoreRepository.save(score_3);
 			};
-		}
+			}
 	}

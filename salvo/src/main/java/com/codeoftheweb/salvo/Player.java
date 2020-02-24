@@ -2,7 +2,6 @@ package com.codeoftheweb.salvo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -22,8 +21,8 @@ public class Player {
     private String userName;
     @OneToMany(mappedBy="player", fetch= FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
-
-
+    @OneToMany(mappedBy="player", fetch= FetchType.EAGER)
+    Set<Score> scores;
 
     public Player() { }
 
@@ -31,7 +30,6 @@ public class Player {
         firstName = first;
         lastName = last;
         userName = user;
-
     }
 
     public void addGamePlayer(GamePlayer gamePlayer) {
@@ -43,7 +41,14 @@ public class Player {
     public List<Game> getGames() {
        return (List<Game>) gamePlayers.stream().map(sub -> sub.getGame()).collect(toList());
     }
+    @JsonIgnore
+    public Set<Score> getScores() {
+        return scores;
+    }
 
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
+    }
 
     public String getFirstName() {
         return firstName;

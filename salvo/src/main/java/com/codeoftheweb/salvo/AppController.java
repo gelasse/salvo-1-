@@ -69,6 +69,7 @@ public class AppController {
             gameMap.put("players", gamePlayer.getPlayer());
             gameMap.put("ships", gamePlayer.getShips());
             gameMap.put("salvos", gamePlayer.getSalvos());
+            gameMap.put("score", gamePlayer.getPlayer().getScores());
             gamesList.add(gameMap);
         };
         return gamesList;
@@ -88,6 +89,7 @@ public class AppController {
             gameMap.put("players", gamePlayer.getPlayer());
             gameMap.put("ships", gamePlayer.getShips());
             gameMap.put("salvos", gamePlayer.getSalvos());
+            gameMap.put("score", gamePlayer.getPlayer().getScores());
             gamesList.add(gameMap);
         };
         return gamesList;

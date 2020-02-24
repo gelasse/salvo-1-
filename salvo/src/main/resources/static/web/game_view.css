@@ -1,17 +1,22 @@
 body
 {
-color: green;}
+color: green;
+}
 table{
 border-collapse: collapse;
-width: 1000px;}
-td{
+width: 1020px;}
+td, th{
 border: black 1px solid;
+width: 40px;
+height: 40px;
 }
 
-#1
+/*#A1 ,#A2
 {
-color: black;
+background-color: green;
 }
+#B4, #B5{
+background-color: yellow;}*/
 #output
 {
 color: black;
