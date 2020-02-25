@@ -63,7 +63,6 @@ public class AppController {
         List<GamePlayer> gamePlayers = gamePlayerRepository.findAll();
         List<Map> gamesList = new ArrayList<>();
 
-
         for (GamePlayer gamePlayer: gamePlayers) {
             //System.out.println(game.getPlayers());
             Map<String, Object> gameMap = new LinkedHashMap<>();

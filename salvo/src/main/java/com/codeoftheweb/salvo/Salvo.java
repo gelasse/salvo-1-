@@ -26,9 +26,9 @@ public class Salvo {
 
     public Salvo(){
     }
-    public Salvo(GamePlayer gamePlayer, int turn_number, List<String> salvoLocations){
-        this.gamePlayer = gamePlayer;
+    public Salvo(int turn_number,GamePlayer gamePlayer ,List<String> salvoLocations){
         this.turn_number = turn_number;
+        this.gamePlayer = gamePlayer;
         this.salvoLocations = salvoLocations;
     }
     public List<String> getSalvoLocations() {

@@ -6,17 +6,29 @@
     <link rel="stylesheet" type="text/css" href="game_view.css" />
     <title>Ship Locations</title> </head>
 <body>
-<table class="table table-striped">
-    <thead>
-    <tr id="entete"></tr>
-    </thead>
-    <tbody id="corps">
-    </tbody>
-
-</table>
-<div>
+    <div class="tableaux">
+        <div id="shipsLocation">
+            <table class="table table-striped">
+                <thead>
+                    <tr id="entete"></tr>
+                </thead>
+                <tbody id="corps">
+                </tbody>
+            </table>
+        </div>
+        <div id="salvoesLocation">
+            <table class="table table-striped">
+                <thead>
+                    <tr id="enteteSalvoes"></tr>
+                </thead>
+                <tbody id="corpsSalvoes">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
     <ol id="output"></ol>
-</div>
+    </div>
 
 <script src="game_view.js"></script>
 </body>

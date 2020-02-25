@@ -36,6 +36,7 @@ public class SalvoApplication {
 
 				GamePlayer gamePlayer_1 = new GamePlayer(game_1, player_1);
 				GamePlayer gamePlayer_2 = new GamePlayer(game_2, player_2);    //gamePlayer_1.addShip(cruiser);
+				GamePlayer gamePlayer_3 = new GamePlayer(game_3, player_3);
 
 				List<String> location1 = new ArrayList<>();
 				location1.add("A1");
@@ -55,29 +56,26 @@ public class SalvoApplication {
 				Ship destroyer = new Ship("destroyer", location2, gamePlayer_1);
 				Ship battleship = new Ship("battleship", location3, gamePlayer_1);
 				Ship cruiser2 = new Ship("cruiser", location1, gamePlayer_2);
-
-				GamePlayer gamePlayer_3 = new GamePlayer(game_3, player_3);
-
 				Ship cruiser = new Ship("cruiser", location1, gamePlayer_1);
 				List<String> salvoLocation1 = new ArrayList<>();
-				salvoLocation1.add("C1");
-				salvoLocation1.add("C2");
-				salvoLocation1.add("C3");
+				salvoLocation1.add("CC1");
+				salvoLocation1.add("CC2");
+				salvoLocation1.add("CC3");
 				List<String> salvoLocation2 = new ArrayList<>();
-				salvoLocation1.add("B1");
-				salvoLocation1.add("B2");
-				salvoLocation1.add("B3");
+				salvoLocation2.add("BB1");
+				salvoLocation2.add("BB2");
+				salvoLocation2.add("BB3");
 				List<String> salvoLocation3 = new ArrayList<>();
-				salvoLocation1.add("A1");
-				salvoLocation1.add("A2");
-				salvoLocation1.add("A3");
-				salvoLocation1.add("A4");
-				salvoLocation1.add("A5");
-				Salvo salvo1_1 = new Salvo(gamePlayer_1, 1, salvoLocation1);
-				Salvo salvo1_2 = new Salvo(gamePlayer_1, 2, salvoLocation2);
-				Salvo salvo2_1 = new Salvo(gamePlayer_1, 1, salvoLocation1);
-				Salvo salvo2_2 = new Salvo(gamePlayer_2, 2, salvoLocation3);
-				Salvo salvo3 = new Salvo(gamePlayer_3, 3, salvoLocation3);
+				salvoLocation3.add("AA1");
+				salvoLocation3.add("AA2");
+				salvoLocation3.add("AA3");
+				salvoLocation3.add("AA4");
+				salvoLocation3.add("AA5");
+				Salvo salvo1_1 = new Salvo(1, gamePlayer_1, salvoLocation1);
+				Salvo salvo1_2 = new Salvo(2, gamePlayer_1, salvoLocation2);
+				Salvo salvo2_1 = new Salvo(1, gamePlayer_2, salvoLocation2);
+				Salvo salvo2_2 = new Salvo(2, gamePlayer_2, salvoLocation3);
+				Salvo salvo3 = new Salvo(3, gamePlayer_3, salvoLocation3);
 				Score score_1 = new Score(game_1, player_1, 0);
 				Score score_2 = new Score(game_2, player_1, 0.5);
 				Score score_3 = new Score(game_3, player_2, 1);

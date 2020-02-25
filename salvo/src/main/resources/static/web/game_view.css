@@ -2,9 +2,14 @@ body
 {
 color: green;
 }
+.tableaux{
+display: flex;
+justify-content: space-between;
+}
+
 table{
 border-collapse: collapse;
-width: 1020px;}
+width: 600px;}
 td, th{
 border: black 1px solid;
 width: 40px;
