@@ -20,7 +20,10 @@ public class AppController {
     private ShipRepository shipRepository;
     @Autowired
     private GamePlayerRepository gamePlayerRepository;
-    @Autowired SalvoRepository salvoRepository;
+    @Autowired
+    private SalvoRepository salvoRepository;
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     @RequestMapping("/games")
     public List<Map> getAll() {
@@ -93,5 +96,23 @@ public class AppController {
             gamesList.add(gameMap);
         };
         return gamesList;
+    }
+
+    @RequestMapping("/leaderboard")
+    public Set<Map<String, Object>> getLeaderBoardInfo(){
+        List <GamePlayer> gamePlayers = gamePlayerRepository.findAll();
+        Set<Map<String, Object>> leaderboard = new LinkedHashSet<>();
+
+        for (GamePlayer gamePlayer: gamePlayers){
+            Map<String, Object> gameMap = new LinkedHashMap<>();
+            gameMap.put("name", gamePlayer.getPlayer().getLastName());
+            System.out.println(gamePlayer.getPlayer().getLastName());
+            gameMap.put("totalScore", gamePlayer.getPlayer().getScores().stream().mapToDouble(score ->score.getScore()).sum());
+            gameMap.put("totalWin", gamePlayer.getPlayer().getScores().stream().filter(score ->score.getScore() == 1).count());
+            gameMap.put("totalLoss", gamePlayer.getPlayer().getScores().stream().filter(score ->score.getScore() == 0).count());
+            gameMap.put("totalTies", gamePlayer.getPlayer().getScores().stream().filter(score -> score.getScore() == 0.5).count());
+            leaderboard.add(gameMap);
+        }
+        return leaderboard;
     }
 }
