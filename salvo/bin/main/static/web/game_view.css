@@ -1,0 +1,28 @@
+body
+{
+color: green;
+}
+.tableaux{
+display: flex;
+justify-content: space-between;
+}
+
+table{
+border-collapse: collapse;
+width: 600px;}
+td, th{
+border: black 1px solid;
+width: 40px;
+height: 40px;
+}
+
+/*#A1 ,#A2
+{
+background-color: green;
+}
+#B4, #B5{
+background-color: yellow;}*/
+#output
+{
+color: black;
+}
