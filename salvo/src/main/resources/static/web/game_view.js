@@ -51,6 +51,7 @@ var tableauCorps = ["A","B","C","D","E","F","G","H","I","J"];
 //console.log(tableau_colonnes);
 
 function dessinerTableau(){
+console.log(tableauEntete);
 for (let i of tableauEntete) {
 //console.log("ha");
 //console.log(tableau_lignes);

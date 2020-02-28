@@ -18,7 +18,7 @@ fetch(url, {
 
 //let list = document.getElementById("output");
 let table = document.getElementById("table");
-function listOfGames(){
+next: function listOfGames(){
 for (let i of lists) {
 console.log(lists.length);
 let tr = document.createElement("tr");
