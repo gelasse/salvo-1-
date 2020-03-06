@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.web.context.WebApplicationContext;
@@ -30,15 +32,18 @@ public class SalvoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SalvoApplication.class, args);}
-
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
 		@Bean
 		public CommandLineRunner initData (PlayerRepository repository, GameRepository
 		gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository ,SalvoRepository salvoRepository, ScoreRepository scoreRepository){
 			return (args) -> {
 				// save a couple of customers
-				Player player_1 = new Player("Jake", "Brauer", "jacke_brauer@gmail.com", "akolo");
-				Player player_2 = new Player("Allo", "hello", "allo_hello@gmail.com", "akoli");
-				Player player_3 = new Player("anna", "Masculi", "anna_Masculi@gmail.com", "akola");
+				Player player_1 = new Player("Jake", "Brauer", "jacke_brauer@gmail.com", passwordEncoder().encode("akolo"));
+				Player player_2 = new Player("Allo", "hello", "allo_hello@gmail.com", passwordEncoder().encode("akoli"));
+				Player player_3 = new Player("anna", "Masculi", "anna_Masculi@gmail.com", passwordEncoder().encode("akola"));
 
 				Date newDate_1 = new Date();
 				Date newDate_1_1 = Date.from(newDate_1.toInstant().plusSeconds(3600));
@@ -51,7 +56,7 @@ public class SalvoApplication {
 				Game game_3 = new Game(newDate_1_2);
 
 				GamePlayer gamePlayer_1 = new GamePlayer(game_1, player_1);
-				GamePlayer gamePlayer_2 = new GamePlayer(game_2, player_2);    //gamePlayer_1.addShip(cruiser);
+				GamePlayer gamePlayer_2 = new GamePlayer(game_1, player_2);    //gamePlayer_1.addShip(cruiser);
 				GamePlayer gamePlayer_3 = new GamePlayer(game_3, player_3);
 
 				List<String> location1 = new ArrayList<>();
@@ -129,8 +134,10 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 	@Override
 	public void init(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(inputName-> {
+			System.out.println(inputName);
 			Player player = playerRepository.findByUserName(inputName);
 			if (player != null) {
+                System.out.println("logging in");
 				return new User(player.getUserName(), player.getPassword(),
 						AuthorityUtils.createAuthorityList("USER"));
 			} else {
@@ -155,10 +162,11 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/web/home*").permitAll()
 				.antMatchers("/web/players*").permitAll()
 				.antMatchers("/api/leaderboard/*").permitAll()
-				.antMatchers("/api/game*").permitAll()
+				.antMatchers("/api/games/**").permitAll()
 				.antMatchers("/api/login*").permitAll()
 				.antMatchers("/web/game*").permitAll()
 				.antMatchers("/api/gamePlayers/**").permitAll()
+				.antMatchers("/web/login*").permitAll()
 				.antMatchers("/web/game_view*").permitAll()
 				.antMatchers("/**").hasAuthority("USER").anyRequest().authenticated()
 				.and().formLogin()

@@ -1,7 +1,11 @@
 package com.codeoftheweb.salvo;
 //package Game.java;
 
+//import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,10 +30,10 @@ public class AppController {
     private ScoreRepository scoreRepository;
 
     @RequestMapping("/games")
-    public List<Map> getAll() {
+    public List<Map> getAll(Authentication authentication) {
         List<Game> games = gameRepository.findAll();
         List<Map> gamesList = new ArrayList<>();
-
+        System.out.println(getLogin(authentication));
         games.forEach(game -> {
             System.out.println(game.getPlayers());
             Map<String, Object> gameMap = new LinkedHashMap<>();
@@ -39,13 +43,23 @@ public class AppController {
         gamesList.add(gameMap);
         });
         return gamesList;
+        
     };
+    public boolean getLogin(Authentication authentication) {
+        return authentication == null || authentication instanceof AnonymousAuthenticationToken;
+//        Player loggedInPlayer = playerRepository.findByUserName(authentication.name());
+//        if(loggedInPlayer != null){
+//            return loggedInPlayer;
+//        }else{
+//            return null;
+//        }
 
+    }
     @RequestMapping("/games/{id}")
-    public List<Map> getAll(@PathVariable long id) {
+    public List<Map> getAll(@PathVariable long id,Authentication authentication) {
         List<Game> games = gameRepository.findAllById(Collections.singleton(id));
         List<Map> gamesList = new ArrayList<>();
-
+        System.out.println(getLogin(authentication));
         games.forEach(game -> {
             System.out.println(game.getPlayers());
             Map<String, Object> gameMap = new LinkedHashMap<>();
